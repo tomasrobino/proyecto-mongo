@@ -3,6 +3,7 @@ package org.example;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 public class PostRepository {
     private final MongoCollection<Post> postsCollection = MongoUtil.getDatabase().getCollection("posts", Post.class);
@@ -18,13 +19,13 @@ public class PostRepository {
 
     public Post findById(String id) {
         System.out.println("findById: "+id);
-        return postsCollection.find(new Document("_id", id)).first();
+        return postsCollection.find(new Document("_id", new ObjectId(id))).first();
 
     }
 
     public void deleteById(String id) {
         System.out.println("deleteById: "+id);
-        DeleteResult dr = postsCollection.deleteOne(new Document("_id", id));
+        DeleteResult dr = postsCollection.deleteOne(new Document("_id", new ObjectId(id)));
         System.out.println("Deleted "+dr.getDeletedCount()+" documents");
     }
 
