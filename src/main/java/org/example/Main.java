@@ -27,6 +27,14 @@ public class Main {
             System.out.println(post.getId());
         });
         postRepository.deleteById(newPost.getId().toString());
+        postRepository.save(newPost);
+        Comentario comentario3 = new Comentario();
+        comentario3.setContenido("tres");
+        ArrayList<Comentario> comentarios2 = new ArrayList<>();
+        comentarios2.add(comentario3);
+        newPost.setComentarios(comentarios2);
+        postRepository.update(newPost);
+        System.out.println(postRepository.findById(newPost.getId().toString()));
 
 
         MongoUtil.close();
