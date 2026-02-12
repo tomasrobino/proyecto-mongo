@@ -1,6 +1,7 @@
 package org.example;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 
 public class PostRepository {
@@ -11,23 +12,24 @@ public class PostRepository {
     }
 
     public Iterable<Post> findAll() {
+        System.out.println("findAll");
         return postsCollection.find();
     }
 
     public Post findById(String id) {
+        System.out.println("findById: "+id);
         return postsCollection.find(new Document("_id", id)).first();
 
     }
 
     public void deleteById(String id) {
-
+        System.out.println("deleteById: "+id);
+        DeleteResult dr = postsCollection.deleteOne(new Document("_id", id));
+        System.out.println("Deleted "+dr.getDeletedCount()+" documents");
     }
 
     public void update(Post post) {
-
-    }
-
-    public void deleteAll() {
-
+        System.out.println("update: "+post.getId());
+        postsCollection.replaceOne(new Document("_id", post.getId()), post);
     }
 }

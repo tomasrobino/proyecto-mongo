@@ -2,12 +2,33 @@ package org.example;
 
 import com.mongodb.client.MongoDatabase;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
         MongoDatabase db = MongoUtil.getDatabase();
         System.out.println(db.getName());
         PostRepository postRepository = new PostRepository();
-        postRepository.save(new Post());
-        System.out.println(postRepository.findAll());
+        Post newPost = new Post();
+        Comentario comentario = new Comentario();
+        comentario.setContenido("Hola");
+        Comentario comentario2 = new Comentario();
+        comentario2.setContenido("Adios");
+        ArrayList<Comentario> comentarios = new ArrayList<>();
+        comentarios.add(comentario);
+        comentarios.add(comentario2);
+        newPost.setComentarios(comentarios);
+        postRepository.save(newPost);
+        Iterable<Post> posts = postRepository.findAll();
+        posts.forEach(post -> {
+            post.getComentarios().forEach(comentario1 -> {
+                System.out.println(comentario1.getContenido());
+            });
+            System.out.println(post.getId());
+        });
+        postRepository.deleteById(newPost.getId().toString());
+
+
+        MongoUtil.close();
     }
 }
