@@ -6,8 +6,6 @@ import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.util.List;
-
 public class PostRepository {
     private final MongoCollection<Post> postsCollection = MongoUtil.getDatabase().getCollection("posts", Post.class);
 
@@ -40,7 +38,7 @@ public class PostRepository {
         System.out.println("update: "+post.getId());
         postsCollection.replaceOne(new Document("_id", post.getId()), post);
     }
-    
+
     public Iterable<Post> findAllByTag(String tag) {
         Iterable<Post> posts = postsCollection.find(Filters.eq("etiquetas", tag));
         System.out.println("findAllByTag: "+tag);

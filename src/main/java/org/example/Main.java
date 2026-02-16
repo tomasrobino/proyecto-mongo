@@ -24,9 +24,7 @@ public class Main {
 
         Iterable<Post> posts = postRepository.findAll();
         posts.forEach(post -> {
-            post.getComentarios().forEach(comentario1 -> {
-                System.out.println(comentario1.getContenido());
-            });
+            post.getComentarios().forEach(comentario1 -> System.out.println(comentario1.getContenido()));
             System.out.println(post.getId());
         });
 
