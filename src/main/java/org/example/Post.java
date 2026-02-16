@@ -12,7 +12,7 @@ public class Post {
     private ObjectId id;
     private String titulo;
     private String mensaje;
-    private String etiquetas;
+    private List<String> etiquetas;
     private Date fechaPublicacion;
     private List<Comentario> comentarios = new ArrayList<>();
 
@@ -42,11 +42,11 @@ public class Post {
         this.mensaje = mensaje;
     }
 
-    public String getEtiquetas() {
+    public List<String> getEtiquetas() {
         return etiquetas;
     }
 
-    public void setEtiquetas(String etiquetas) {
+    public void setEtiquetas(List<String> etiquetas) {
         this.etiquetas = etiquetas;
     }
 
