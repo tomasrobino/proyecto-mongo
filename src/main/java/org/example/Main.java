@@ -12,6 +12,10 @@ public class Main {
         PostRepository postRepository = new PostRepository();
 
         Post newPost = new Post();
+        newPost.setTitulo("Mi primer post");
+        newPost.setMensaje("Este es mi primer mensaje");
+        newPost.setFechaPublicacion(new java.util.Date());
+
         Comentario comentario = new Comentario();
         comentario.setContenido("Hola");
         Comentario comentario2 = new Comentario();
