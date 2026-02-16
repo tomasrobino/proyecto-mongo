@@ -29,6 +29,10 @@ public class PostRepository {
         System.out.println("Deleted "+dr.getDeletedCount()+" documents");
     }
 
+    public void deleteAll() {
+        postsCollection.drop();
+    }
+
     public void update(Post post) {
         System.out.println("update: "+post.getId());
         postsCollection.replaceOne(new Document("_id", post.getId()), post);
