@@ -1,9 +1,12 @@
 package org.example;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+
+import java.util.List;
 
 public class PostRepository {
     private final MongoCollection<Post> postsCollection = MongoUtil.getDatabase().getCollection("posts", Post.class);
@@ -36,5 +39,12 @@ public class PostRepository {
     public void update(Post post) {
         System.out.println("update: "+post.getId());
         postsCollection.replaceOne(new Document("_id", post.getId()), post);
+    }
+    //TODO no funciona
+    public Iterable<Post> findAllByTag(String tag) {
+        Iterable<Post> posts = postsCollection.find(Filters.eq("etiquetas", tag));
+        System.out.println("findAllByTag: "+tag);
+        System.out.println(posts);
+        return posts;
     }
 }

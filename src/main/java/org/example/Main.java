@@ -35,7 +35,31 @@ public class Main {
         newPost.setComentarios(comentarios2);
         postRepository.update(newPost);
         System.out.println(postRepository.findById(newPost.getId().toString()));
+        System.out.println(postRepository.findAll());
+        postRepository.deleteAll();
 
+        Post post1 = new Post();
+        ArrayList<String> tags = new ArrayList<>();
+        tags.add("java");
+        tags.add("spring");
+        tags.add("mongodb");
+        post1.setEtiquetas(tags);
+        postRepository.save(post1);
+
+        Post post2 = new Post();
+        tags = new ArrayList<>();
+        tags.add("java");
+        post2.setEtiquetas(tags);
+        postRepository.save(post2);
+
+        Post post3 = new Post();
+        tags = new ArrayList<>();
+        tags.add("spring");
+        post3.setEtiquetas(tags);
+        postRepository.save(post3);
+
+        Iterable<Post> posts2 = postRepository.findAllByTag("java");
+        posts2.forEach(post -> System.out.println(post.getId()));
 
         MongoUtil.close();
     }

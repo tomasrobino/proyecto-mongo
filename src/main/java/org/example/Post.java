@@ -16,7 +16,9 @@ public class Post {
     private Date fechaPublicacion;
     private List<Comentario> comentarios = new ArrayList<>();
 
-    public Post() {}
+    public Post() {
+        etiquetas = new ArrayList<>();
+    }
 
     public ObjectId getId() {
         return id;
