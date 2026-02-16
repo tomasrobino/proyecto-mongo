@@ -40,7 +40,7 @@ public class PostRepository {
         System.out.println("update: "+post.getId());
         postsCollection.replaceOne(new Document("_id", post.getId()), post);
     }
-    //TODO no funciona
+    
     public Iterable<Post> findAllByTag(String tag) {
         Iterable<Post> posts = postsCollection.find(Filters.eq("etiquetas", tag));
         System.out.println("findAllByTag: "+tag);
